@@ -1,14 +1,8 @@
 <template>
-    <h4>Period akvizicije podataka: </h4>
-    <select class="select select-bordered select-sm w-full max-w-[8rem]">
-        <option selected>100xT</option>
-        <option>50xT</option>
-        <option>20xT</option>
-        <option>10xT</option>
-    </select>
+    <ConnectionSettings />
 
     <h3>Upravljanje motorom</h3>
-    <div class="flex mt-4 items-center">
+    <div class="flex items-center">
         <div class="mx-auto btn-group btn-group-horizontal">
             <button class="w-32 btn bg-error text-base-100">STOP</button>
             <button class="btn bg-green-400 text-neutral hover:text-base-100">START</button>
@@ -45,10 +39,15 @@
 
     <h4>Parametri regulatora</h4>
 
-
+    <RegulatorBaseForm title="Regulator brzine" endpoint="regspeed" />
+    <RegulatorBaseForm title="Regulator Id" endpoint="regdirect" />
+    <RegulatorBaseForm title="Regulator Iq" endpoint="regquad" />
 
     <a class="mt-auto text-center text-base-100" href="http://lesjak.tech" target="_blank" rel="noopener noreferrer">Robert Lesjak - lesjak.tech</a>
 </template>
 
 <script setup lang="ts">
+import ConnectionSettings from '@/components/ConnectionSettings.vue';
+import RegulatorBaseForm from '../components/RegulatorBaseForm.vue';
+
 </script>

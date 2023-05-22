@@ -1,14 +1,16 @@
 <template>
   <div class="flex w-full h-full">
     <div class="w-full p-2">
+      <BaseGraph />
     </div>
-    <div class="flex flex-col w-80 p-2 pt-6 border-l-base-300 border-l bg-base-200 prose">
+    <div class="w-80 p-2 flex flex-col overflow-y-auto border-l-base-300 border-l bg-base-200 prose">
       <SidebarContent />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import SidebarContent from './components/SidebarContent.vue';
+import BaseGraph from './components/BaseGraph.vue';
+import SidebarContent from './sections/SidebarContent.vue';
 
 </script>
