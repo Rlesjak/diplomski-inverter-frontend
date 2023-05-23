@@ -1,5 +1,5 @@
 <template>
-    <div id="baseChart1" class="w-full h-full"></div>
+    <div id="baseChart1" class="w-full h-[1500px]"></div>
 </template>
 
 <script setup lang="ts">

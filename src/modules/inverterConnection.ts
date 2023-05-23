@@ -1,11 +1,12 @@
 import { inverterConnected } from "../store/statusStore";
+import type { InverterPacket } from "./inverterPacket";
 
 const INVERTER_ADDRESS = "http://192.168.1.10:8888";
 const STREAM_ENDPOINT = "";
 
 let inverterEventSource: EventSource | null = null;
 
-type StreamConsumer = (data: number[]) => void;
+type StreamConsumer = (data: InverterPacket) => void;
 const streamSubscribers: Array<StreamConsumer> = [];
 
 export function setupEventSource() {
@@ -41,6 +42,7 @@ export function setupEventSource() {
 
 export function closeEventSource() {
     inverterEventSource?.close();
+    inverterEventSource = null;
 }
 
 export function subscribeToInverterStream(consumer: StreamConsumer) {
@@ -48,15 +50,15 @@ export function subscribeToInverterStream(consumer: StreamConsumer) {
 }
 
 function processInverterStreamEvent(event: MessageEvent) {
-    const packetData = parseInverterStreamPacket(event.data);
+    const packetData: InverterPacket = parseInverterStreamPacket(event.data);
 
-    // Run all subscribers
+    // Pokreni sve pretplatnike na stream
     streamSubscribers.forEach((subscriber) => {
         subscriber(packetData);
     });
 }
 
-function parseInverterStreamPacket(packet: string) {
+function parseInverterStreamPacket(packet: string): InverterPacket {
     const packetParts = packet.split(",");
-    return packetParts.map((part) => Number(part));
+    return packetParts.map((part) => Number(part)) as InverterPacket;
 }

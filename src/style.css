@@ -6,3 +6,13 @@ html, body, #app {
     width: 100%;
     height: 100%;
 }
+
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
