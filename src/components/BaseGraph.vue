@@ -3,13 +3,13 @@
 </template>
 
 <script setup lang="ts">
-import { generateChart } from '../inverter/inverterConnection';
+import { initialiseScopeInstance } from '../modules/scope';
 import { onMounted } from 'vue';
 
 onMounted(() => {
-    const chartEl = document.getElementById('baseChart1');
+    const chartEl = document.getElementById('baseChart1') as HTMLDivElement;
     if (chartEl) {
-        generateChart(chartEl);
+        initialiseScopeInstance(chartEl);
     }
 })
 </script>
