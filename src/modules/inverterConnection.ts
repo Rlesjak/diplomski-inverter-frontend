@@ -1,13 +1,14 @@
-import { inverterConnected } from "../store/statusStore";
+import { inverterConnected, inverterStatus } from "../store/statusStore";
 import type { InverterPacket } from "./inverterPacket";
 
 const INVERTER_ADDRESS = "http://192.168.1.10:8888";
-const STREAM_ENDPOINT = "";
+const STREAM_ENDPOINT = "/stream";
 
 let inverterEventSource: EventSource | null = null;
 
 type StreamConsumer = (data: InverterPacket) => void;
 const streamSubscribers: Array<StreamConsumer> = [];
+const subscriberIds: Array<string> = [];
 
 export function setupEventSource() {
     return new Promise<void>((resolve, reject) => {
@@ -45,8 +46,10 @@ export function closeEventSource() {
     inverterEventSource = null;
 }
 
-export function subscribeToInverterStream(consumer: StreamConsumer) {
+export function subscribeToInverterStream(id: string, consumer: StreamConsumer) {
+    if (subscriberIds.includes(id)) return;
     streamSubscribers.push(consumer);
+    subscriberIds.push(id);
 }
 
 function processInverterStreamEvent(event: MessageEvent) {
@@ -62,3 +65,44 @@ function parseInverterStreamPacket(packet: string): InverterPacket {
     const packetParts = packet.split(",");
     return packetParts.map((part) => Number(part)) as InverterPacket;
 }
+
+async function sendCommand(endpoint: string, value: number) {
+    await fetch(`${INVERTER_ADDRESS}${endpoint}?${value}`, {
+        mode: "no-cors"
+    });
+}
+
+export const InverterCommand = {
+    motorEnable: async () => {
+        await sendCommand("/MotEn", 1);
+    },
+    motorDisable: async () => {
+        await sendCommand("/MotEn", 0);
+    },
+    setId: async (value: number) => {
+        await sendCommand("/Id_ref", value);
+    },
+    setSpeed: async (value: number) => {
+        await sendCommand("/N_ref", value);
+    },
+    setSpeedRegProportionalGain: async (value: number) => {
+        await sendCommand("/SpdKp", value);
+    },
+    setSpeedRegIntegralGain: async (value: number) => {
+        await sendCommand("/SpdKi", value);
+    }
+}
+
+const skipEveryNth = 300;
+let skipCounter = 0;
+
+subscribeToInverterStream("inverterStatus", (data) => {
+    skipCounter++;
+    if (skipCounter >= skipEveryNth) {
+        skipCounter = 0;
+        inverterStatus.dcBusVoltage = data[4];
+        inverterStatus.motorRunning = data[20] > 0.9 ? true : false;
+        inverterStatus.regSpdKp = data[22];
+        inverterStatus.regSpdKi = data[23];
+    }
+});

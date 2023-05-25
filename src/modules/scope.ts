@@ -82,7 +82,7 @@ export function initialiseScopeInstance(containerElement: HTMLDivElement): void 
     synchronizeAxisIntervals(...xAxes);
 
     // Subscribe serieseseses to inverter stream
-    subscribeToInverterStream((data) => {
+    subscribeToInverterStream("scope", (data) => {
         // Brzina vrtnje motora
         measuredSpeedSeries.add({ x: data[0], y: data[18] });
         referenceSpeedSeries.add({ x: data[0], y: data[21] });
