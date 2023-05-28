@@ -1,14 +1,14 @@
 import { inverterConnected, inverterStatus } from "../store/statusStore";
 import type { InverterPacket } from "./inverterPacket";
 
-const INVERTER_ADDRESS = "http://192.168.1.10:8888";
+// const INVERTER_ADDRESS = "http://192.168.1.10:8888";
+const INVERTER_ADDRESS = "http://localhost:5000";
 const STREAM_ENDPOINT = "/stream";
 
 let inverterEventSource: EventSource | null = null;
 
 type StreamConsumer = (data: InverterPacket) => void;
-const streamSubscribers: Array<StreamConsumer> = [];
-const subscriberIds: Array<string> = [];
+const streamSubscribers: Map<string, StreamConsumer> = new Map();
 
 export function setupEventSource() {
     return new Promise<void>((resolve, reject) => {
@@ -47,9 +47,11 @@ export function closeEventSource() {
 }
 
 export function subscribeToInverterStream(id: string, consumer: StreamConsumer) {
-    if (subscriberIds.includes(id)) return;
-    streamSubscribers.push(consumer);
-    subscriberIds.push(id);
+    streamSubscribers.set(id, consumer);
+}
+
+export function unsubscribeFromInverterStream(id: string) {
+    streamSubscribers.delete(id);
 }
 
 function processInverterStreamEvent(event: MessageEvent) {

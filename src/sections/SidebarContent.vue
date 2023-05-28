@@ -2,7 +2,7 @@
     <ConnectionSettings />
 
     <Transition>
-        <div v-if="inverterConnected == false">
+        <div v-if="inverterConnected">
             <h3>Upravljanje motorom</h3>
             <div class="flex items-center">
                 <div class="mx-auto btn-group btn-group-horizontal">
@@ -90,7 +90,33 @@
         </div>
     </Transition>
 
-    <a class="mt-auto text-center text-gray-500" href="http://lesjak.tech" target="_blank" rel="noopener noreferrer">Robert Lesjak - lesjak.tech</a>
+    <div class="flex flex-col">
+        <h4>Snimi i spremi podatke u csv </h4>
+        <div @click="handleRecordBtn()" class="btn btn-secondary" :class="{'animate-pulse':recording}">
+            <svg v-if="recording" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 9.563C9 9.252 9.252 9 9.563 9h4.874c.311 0 .563.252.563.563v4.874c0 .311-.252.563-.563.563H9.564A.562.562 0 019 14.437V9.564z" />
+            </svg>
+            <svg v-else xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" d="M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9a2.25 2.25 0 002.25 2.25z" />
+            </svg>
+        </div>
+    </div>
+
+    <div class="mt-auto pt-6 ml-8">
+        <template v-if="memory">
+            <div opacity="50">
+                {{ `Used: ${size(memory.usedJSHeapSize)}` }}
+            </div>
+            <div opacity="50">
+                {{ `Allocated: ${size(memory.totalJSHeapSize)}` }}
+            </div>
+            <div opacity="50">
+                {{ `Limit: ${size(memory.jsHeapSizeLimit)}` }}
+            </div>
+        </template>
+    </div>
+    <a class="mt-4 text-center text-gray-500" href="http://lesjak.tech" target="_blank" rel="noopener noreferrer">Robert Lesjak - lesjak.tech</a>
 </template>
 
 <script setup lang="ts">
@@ -98,10 +124,14 @@ import ConnectionSettings from '@/components/ConnectionSettings.vue';
 import RegulatorBaseForm from '../components/RegulatorBaseForm.vue';
 import { inverterConnected, inverterStatus } from '@/store/statusStore';
 import { InverterCommand } from '@/modules/inverterConnection';
+import { startRecording, stopRecordingAndExport } from '@/modules/dataExport';
+import { useMemory } from '@vueuse/core'
 import { ref } from 'vue';
 
 const id = ref(0);
 const nref = ref(0);
+const recording = ref(false);
+const { memory } = useMemory()
 
 function submitid() {
     InverterCommand.setId(id.value);
@@ -109,5 +139,20 @@ function submitid() {
 
 function submitnref() {
     InverterCommand.setSpeed(nref.value);
+}
+
+function handleRecordBtn() {
+    if(recording.value) {
+        recording.value = false;
+        stopRecordingAndExport();
+        return;
+    }
+    recording.value = true;
+    startRecording();
+}
+
+function size(v: number) {
+  const kb = v / 1024 / 1024
+  return `${kb.toFixed(2)} MB`
 }
 </script>

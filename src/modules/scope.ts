@@ -20,7 +20,7 @@ import { subscribeToInverterStream } from './inverterConnection';
 
 const PADDING_BOTTOM = 30
 const PADDING_TOP = 40
-const PADDING_LEFT = 60
+const PADDING_LEFT = 45
 const ROW_HEIGHT = 300
 const DASHBOARD_HEIGHT = 1400
 
@@ -39,7 +39,7 @@ export function initialiseScopeInstance(containerElement: HTMLDivElement): void 
     const xAxes: Array<Axis> = []
 
     // Brzina vrtnje motora
-    const speedChart = addScopeChart(0, "Brzina vrtnje", dashboard);
+    const speedChart = addScopeChart(0, "Brzina vrtnje", "[rad/s]", dashboard);
     xAxes.push(speedChart.getDefaultAxisX());
     const measuredSpeedSeries = addScopeSeries(speedChart, "Mjerena brzina", "#ff0000");
     const referenceSpeedSeries = addScopeSeries(speedChart, "Referentna brzina", "#0000ff");
@@ -48,14 +48,14 @@ export function initialiseScopeInstance(containerElement: HTMLDivElement): void 
     addLegend(speedChart);
 
     // DQ struje motora
-    const dqCurrentChart = addScopeChart(1, "DQ struje motora", dashboard);
+    const dqCurrentChart = addScopeChart(1, "DQ struje motora", "[A]", dashboard);
     xAxes.push(dqCurrentChart.getDefaultAxisX());
     const idSeries = addScopeSeries(dqCurrentChart, "Id", "#ff0000");
     const iqSeries = addScopeSeries(dqCurrentChart, "Iq", "#0000ff");
     addLegend(dqCurrentChart);
 
     // ABC struje motora
-    const currentChart = addScopeChart(2, "Struje motora", dashboard);
+    const currentChart = addScopeChart(2, "Struje motora", "[A]", dashboard);
     xAxes.push(currentChart.getDefaultAxisX());
     const iaSeries = addScopeSeries(currentChart, "Ia", "#ff0000");
     const ibSeries = addScopeSeries(currentChart, "Ib", "#0000ff");
@@ -63,14 +63,14 @@ export function initialiseScopeInstance(containerElement: HTMLDivElement): void 
     addLegend(currentChart);
 
     // DQ naponi motora
-    const dqVoltageChart = addScopeChart(3, "DQ izlazni naponi motora", dashboard);
+    const dqVoltageChart = addScopeChart(3, "DQ izlazni naponi motora", "[V]", dashboard);
     xAxes.push(dqVoltageChart.getDefaultAxisX());
     const vdSeries = addScopeSeries(dqVoltageChart, "Vd", "#ff0000");
     const vqSeries = addScopeSeries(dqVoltageChart, "Vq", "#0000ff");
     addLegend(dqVoltageChart);
 
     // Mehanicki i elektricni kut rotora
-    const angleChart = addScopeChart(4, "Kut rotora", dashboard);
+    const angleChart = addScopeChart(4, "Kut rotora", "[rad]", dashboard);
     xAxes.push(angleChart.getDefaultAxisX());
     const electricalTheta = addScopeSeries(angleChart, "Encoder theta", "#ff0000");
     const mechanicalTheta = addScopeSeries(angleChart, "Encoder omega", "#0000ff");
@@ -108,7 +108,7 @@ export function initialiseScopeInstance(containerElement: HTMLDivElement): void 
     });
 }
 
-function addScopeChart(atIndex: number, title: string, dashboard: Dashboard, rowHeight?: number): ChartXY {
+function addScopeChart(atIndex: number, title: string, ytitle: string, dashboard: Dashboard, rowHeight?: number): ChartXY {
 
     dashboard.setRowHeight(atIndex, rowHeight ? rowHeight : ROW_HEIGHT);
 
@@ -121,7 +121,7 @@ function addScopeChart(atIndex: number, title: string, dashboard: Dashboard, row
         .setPadding({
             top: 0,
             bottom: 0,
-            left: 0,
+            left: PADDING_LEFT,
         })
         .setAutoCursorMode(AutoCursorModes.disabled)
         .setBackgroundStrokeStyle(emptyLine)
@@ -135,8 +135,9 @@ function addScopeChart(atIndex: number, title: string, dashboard: Dashboard, row
     const yAxis = chart.getDefaultAxisY()
         .setTickStrategy(AxisTickStrategies.Numeric)
         .setStrokeStyle(emptyLine)
-        .setTitleRotation(0)
         .setThickness(PADDING_LEFT)
+        .setTitleRotation(-90)
+        .setTitle(ytitle)
 
     const buttonReset = chart
         .addUIElement()
