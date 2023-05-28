@@ -93,6 +93,7 @@ export const InverterCommand = {
     }
 }
 
+
 const skipEveryNth = 300;
 let skipCounter = 0;
 
@@ -100,9 +101,29 @@ subscribeToInverterStream("inverterStatus", (data) => {
     skipCounter++;
     if (skipCounter >= skipEveryNth) {
         skipCounter = 0;
+
         inverterStatus.dcBusVoltage = data[4];
         inverterStatus.motorRunning = data[20] > 0.9 ? true : false;
+        inverterStatus.wantedSpeed = data[19];
+
+        // Regulator brzine
         inverterStatus.regSpdKp = data[22];
         inverterStatus.regSpdKi = data[23];
+        inverterStatus.regSpdRef = data[21];
+        inverterStatus.regSpdFback = data[11];
+
+        // Regulator Id
+        inverterStatus.regIdKp = data[25];
+        inverterStatus.regIdKi = data[26];
+        inverterStatus.regIdFback = data[13];
+        inverterStatus.regIdRef = data[24];
+        inverterStatus.regIdOutput = data[14];
+
+        // Regulator Iq
+        inverterStatus.regIqKp = data[28];
+        inverterStatus.regIqKi = data[29];
+        inverterStatus.regIqFback = data[15];
+        inverterStatus.regIqRef = data[27];
+        inverterStatus.regIqOutput = data[16];
     }
 });
