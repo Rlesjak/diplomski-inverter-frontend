@@ -90,6 +90,18 @@ export const InverterCommand = {
     },
     setSpeedRegIntegralGain: async (value: number) => {
         await sendCommand("/SpdKi", value);
+    },
+    setIdRegProportionalGain: async (value: number) => {
+        await sendCommand("/IdKp", value);
+    },
+    setIdRegIntegralGain: async (value: number) => {
+        await sendCommand("/IdKi", value);
+    },
+    setIqRegProportionalGain: async (value: number) => {
+        await sendCommand("/IqKp", value);
+    },
+    setIqRegIntegralGain: async (value: number) => {
+        await sendCommand("/IqKi", value);
     }
 }
 

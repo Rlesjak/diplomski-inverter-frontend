@@ -955,7 +955,7 @@
         stroke="#1971c2" stroke-width="2" fill="none"></path>
     </g>
     <g transform="translate(76.33067894736632 369.5004236708744) rotate(0 42.1875 9.600000000000023)"><text x="0" y="0"
-        font-family="Cascadia, Segoe UI Emoji" font-size="16px" fill="#1e1e1e" text-anchor="start"
+        font-family="Cascadia, Segoe UI Emoji" font-size="16px" fill="#0000ff" text-anchor="start"
         style="white-space: pre;" direction="ltr" dominant-baseline="text-before-edge">{{ `${is.regSpdRef.toFixed(4)}r/s` }}</text></g>
     <g stroke-linecap="round"
         transform="translate(54.86662800123213 550.495064086549) rotate(0 50.9317524663536 13.614133284410741)">
@@ -964,7 +964,7 @@
         stroke="#1971c2" stroke-width="2" fill="none"></path>
     </g>
     <g transform="translate(58.31120864631066 554.0964335472539) rotate(0 46.875 9.600000000000023)"><text x="0" y="0"
-        font-family="Cascadia, Segoe UI Emoji" font-size="16px" fill="#1e1e1e" text-anchor="start"
+        font-family="Cascadia, Segoe UI Emoji" font-size="16px" fill="#0000ff" text-anchor="start"
         style="white-space: pre;" direction="ltr" dominant-baseline="text-before-edge">{{ is.wantedSpeed.toFixed(4) }}</text></g>
     <g stroke-linecap="round"
         transform="translate(143.46020896487153 304.7016189794655) rotate(0 50.9317524663536 13.614133284410741)">
@@ -973,7 +973,7 @@
         stroke="#1971c2" stroke-width="2" fill="none"></path>
     </g>
     <g transform="translate(146.90478960995006 308.30298844017045) rotate(0 37.5 9.600000000000023)"><text x="0" y="0"
-        font-family="Cascadia, Segoe UI Emoji" font-size="16px" fill="#1e1e1e" text-anchor="start"
+        font-family="Cascadia, Segoe UI Emoji" font-size="16px" fill="#0000ff" text-anchor="start"
         style="white-space: pre;" direction="ltr" dominant-baseline="text-before-edge">{{ `${is.regSpdFback.toFixed(4)}r/s` }}</text></g>
     <g stroke-linecap="round"
         transform="translate(234.67813005051266 347.33677162611014) rotate(0 50.9317524663536 13.614133284410741)">
@@ -982,7 +982,7 @@
         stroke="#1971c2" stroke-width="2" fill="none"></path>
     </g>
     <g transform="translate(237.96230241320745 350.7777568608625) rotate(0 42.1875 9.600000000000023)"><text x="0" y="0"
-        font-family="Cascadia, Segoe UI Emoji" font-size="16px" fill="#1e1e1e" text-anchor="start"
+        font-family="Cascadia, Segoe UI Emoji" font-size="16px" fill="#0000ff" text-anchor="start"
         style="white-space: pre;" direction="ltr" dominant-baseline="text-before-edge">{{ `${is.regIqFback.toFixed(4)}A` }}</text></g>
     <g stroke-linecap="round"
         transform="translate(215.68429070063394 173.54797150466334) rotate(0 50.9317524663536 13.614133284410741)">
@@ -991,7 +991,7 @@
         stroke="#1971c2" stroke-width="2" fill="none"></path>
     </g>
     <g transform="translate(218.96846306332827 176.98895673941593) rotate(0 46.875 9.600000000000023)"><text x="0" y="0"
-        font-family="Cascadia, Segoe UI Emoji" font-size="16px" fill="#1e1e1e" text-anchor="start"
+        font-family="Cascadia, Segoe UI Emoji" font-size="16px" fill="#0000ff" text-anchor="start"
         style="white-space: pre;" direction="ltr" dominant-baseline="text-before-edge">{{ `${is.regIqRef.toFixed(4)}A` }}</text></g>
     <g stroke-linecap="round"
         transform="translate(283.71750157945917 140.15322480844452) rotate(0 50.9317524663536 13.614133284410741)">
@@ -1000,7 +1000,7 @@
         stroke="#1971c2" stroke-width="2" fill="none"></path>
     </g>
     <g transform="translate(287.0016739421535 143.5942100431971) rotate(0 42.1875 9.600000000000023)"><text x="0" y="0"
-        font-family="Cascadia, Segoe UI Emoji" font-size="16px" fill="#1e1e1e" text-anchor="start"
+        font-family="Cascadia, Segoe UI Emoji" font-size="16px" fill="#0000ff" text-anchor="start"
         style="white-space: pre;" direction="ltr" dominant-baseline="text-before-edge">{{ `${is.regIdFback.toFixed(4)}A` }}</text></g>
     <g stroke-linecap="round"
         transform="translate(264.05102036039443 32.246816218920685) rotate(0 50.9317524663536 13.61413328441077)">
@@ -1009,7 +1009,7 @@
         stroke="#1971c2" stroke-width="2" fill="none"></path>
     </g>
     <g transform="translate(267.33519272308877 35.68780145367327) rotate(0 46.875 9.599999999999994)"><text x="0" y="0"
-        font-family="Cascadia, Segoe UI Emoji" font-size="16px" fill="#1e1e1e" text-anchor="start"
+        font-family="Cascadia, Segoe UI Emoji" font-size="16px" fill="#0000ff" text-anchor="start"
         style="white-space: pre;" direction="ltr" dominant-baseline="text-before-edge">{{ `${is.regIdRef.toFixed(4)}A` }}</text></g>
     <g stroke-linecap="round"
         transform="translate(1100.2731282751333 22.07667771481374) rotate(0 50.9317524663536 13.61413328441077)">
@@ -1018,7 +1018,7 @@
         stroke="#1971c2" stroke-width="2" fill="none"></path>
     </g>
     <g transform="translate(1103.5573006378268 25.51766294956633) rotate(0 32.8125 9.599999999999994)"><text x="0" y="0"
-        font-family="Cascadia, Segoe UI Emoji" font-size="16px" fill="#1e1e1e" text-anchor="start"
+        font-family="Cascadia, Segoe UI Emoji" font-size="16px" fill="#0000ff" text-anchor="start"
         style="white-space: pre;" direction="ltr" dominant-baseline="text-before-edge">{{ `${is.dcBusVoltage.toFixed(4)}V` }}</text></g>
     <g stroke-linecap="round"
         transform="translate(566.6754100488565 19.953444004672747) rotate(0 50.9317524663536 13.61413328441077)">
@@ -1027,7 +1027,7 @@
         stroke="#1971c2" stroke-width="2" fill="none"></path>
     </g>
     <g transform="translate(569.9595824115509 23.145905119375072) rotate(0 28.125 9.599999999999994)"><text x="0" y="0"
-        font-family="Cascadia, Segoe UI Emoji" font-size="16px" fill="#1e1e1e" text-anchor="start"
+        font-family="Cascadia, Segoe UI Emoji" font-size="16px" fill="#0000ff" text-anchor="start"
         style="white-space: pre;" direction="ltr" dominant-baseline="text-before-edge">{{ `${is.regIdOutput.toFixed(4)}V` }}</text></g>
     <g stroke-linecap="round"
         transform="translate(569.2141034945762 266.6928634443244) rotate(0 50.9317524663536 13.614133284410741)">
@@ -1036,7 +1036,7 @@
         stroke="#1971c2" stroke-width="2" fill="none"></path>
     </g>
     <g transform="translate(572.2497331002401 269.6367631650179) rotate(0 28.125 9.600000000000023)"><text x="0" y="0"
-        font-family="Cascadia, Segoe UI Emoji" font-size="16px" fill="#1e1e1e" text-anchor="start"
+        font-family="Cascadia, Segoe UI Emoji" font-size="16px" fill="#0000ff" text-anchor="start"
         style="white-space: pre;" direction="ltr" dominant-baseline="text-before-edge">{{ `${is.regIqOutput.toFixed(4)}V` }}</text></g>
     </svg>
 </template>

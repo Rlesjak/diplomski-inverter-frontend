@@ -2,7 +2,7 @@
     <ConnectionSettings />
 
     <Transition>
-        <div v-if="inverterConnected">
+        <div v-if="inverterConnected == false">
             <h3>Upravljanje motorom</h3>
             <div class="flex items-center">
                 <div class="mx-auto btn-group btn-group-horizontal">
@@ -23,11 +23,24 @@
                 </div>
             </div>
 
-            <h4>Status:</h4>
-            <h5>DCBUS = <strong>{{ inverterStatus.dcBusVoltage }}</strong>V</h5>
-            <span class="mt-2 text-sm font-semibold">SpeedReg:</span>
-            <h5>Kp = <strong>{{ inverterStatus.regSpdKp }}</strong></h5>
-            <h5>Ki = <strong>{{ inverterStatus.regSpdKi }}</strong></h5>
+            <h4>Vrijednosti parametara regulatora:</h4>
+            <div class="flex">
+                <div class="w-1/3">
+                    <span class="mt-2 text-sm font-semibold">SpeedReg:</span>
+                    <h5>Kp = <strong>{{ inverterStatus.regSpdKp }}</strong></h5>
+                    <h5>Ki = <strong>{{ inverterStatus.regSpdKi }}</strong></h5>
+                </div>
+                <div class="w-1/3 pl-1 border-l-2 border-l-gray-400">
+                    <span class="mt-2 text-sm font-semibold">IdReg:</span>
+                    <h5>Kp = <strong>{{ inverterStatus.regIdKp}}</strong></h5>
+                    <h5>Ki = <strong>{{ inverterStatus.regIdKi }}</strong></h5>
+                </div>
+                <div class="w-1/3 pl-1 border-l-2 border-l-gray-400">
+                    <span class="mt-2 text-sm font-semibold">IqReg:</span>
+                    <h5>Kp = <strong>{{ inverterStatus.regIqKp }}</strong></h5>
+                    <h5>Ki = <strong>{{ inverterStatus.regIqKi }}</strong></h5>
+                </div>
+            </div>
 
             <hr class="my-3">
 
@@ -57,7 +70,7 @@
                 </div>
             </div>
 
-            <h4>Parametri regulatora</h4>
+            <h4>Postavljanje parametara regulatora</h4>
 
             <RegulatorBaseForm
                 title="Regulator brzine"
@@ -66,13 +79,13 @@
             />
             <RegulatorBaseForm
                 title="Regulator Id"
-                :kp-setter="() => {}"
-                :ki-setter="() => {}"
+                :kp-setter="InverterCommand.setIdRegProportionalGain"
+                :ki-setter="InverterCommand.setIdRegIntegralGain"
             />
             <RegulatorBaseForm
                 title="Regulator Iq"
-                :kp-setter="() => {}"
-                :ki-setter="() => {}"
+                :kp-setter="InverterCommand.setIqRegProportionalGain"
+                :ki-setter="InverterCommand.setIqRegIntegralGain"
             />
         </div>
     </Transition>
