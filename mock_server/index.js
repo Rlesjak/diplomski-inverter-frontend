@@ -19,7 +19,10 @@ function sendSSE(req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
 
   const intervalId = setInterval(function() {
-    const data = Array.from({length: 29}, () => (Math.random() * 20 - 10).toFixed(2));
+    const data = Array.from({length: 26}, () => 0);
+    data.unshift(Math.sin((count / 10)));
+    data.unshift(Math.sin((count / 10) + 2.09));
+    data.unshift(Math.sin((count / 10) + 2*2.09));
     data.unshift(count.toFixed(2)); // Add the incrementing number at the start of the list
     res.write(`data: ${data.join(',')}\n\n`);
 

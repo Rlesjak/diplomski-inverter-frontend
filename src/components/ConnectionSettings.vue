@@ -1,8 +1,19 @@
 <template>
 
+    <Transition>
+        <div v-if="!inverterConnected">
+            <p class="mb-2">Adresa invertera: </p>
+            <input
+                v-model="inverterAddress"
+                class="w-full px-2 py-1 text-black border border-gray-400 rounded"
+                type="text"
+            >
+        </div>
+    </Transition>
+
     <button
         @click="toggleConnection"
-        class="btn btn-primary"
+        class="mt-4 btn btn-primary"
         :disabled="isLoading"
         :class="{'btn-outline': inverterConnected}"
     >
@@ -12,10 +23,11 @@
 
 <script setup lang="ts">
 import { inverterConnected } from '../store/statusStore'
-import { setupEventSource, closeEventSource } from '../modules/inverterConnection'
+import { setupEventSource, closeEventSource, DEFAULT_INVERTER_ADDRESS } from '../modules/inverterConnection'
 import { ref } from 'vue';
 
 const isLoading = ref(false);
+const inverterAddress = ref(DEFAULT_INVERTER_ADDRESS);
 
 async function toggleConnection() {
     if (inverterConnected.value) {
@@ -31,7 +43,7 @@ async function openConnection() {
     isLoading.value = true;
 
     try {
-        await setupEventSource();
+        await setupEventSource(inverterAddress.value);
         inverterConnected.value = true;
     }
     catch (error) {

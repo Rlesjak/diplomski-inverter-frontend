@@ -1,23 +1,25 @@
 import { inverterConnected, inverterStatus } from "../store/statusStore";
 import type { InverterPacket } from "./inverterPacket";
 
-// const INVERTER_ADDRESS = "http://192.168.1.10:8888";
-const INVERTER_ADDRESS = "http://localhost:5000";
+export const DEFAULT_INVERTER_ADDRESS = "http://192.168.1.10:8888";
 const STREAM_ENDPOINT = "/stream";
+
+let inverterAddress: string | null = null;
 
 let inverterEventSource: EventSource | null = null;
 
 type StreamConsumer = (data: InverterPacket) => void;
 const streamSubscribers: Map<string, StreamConsumer> = new Map();
 
-export function setupEventSource() {
+export function setupEventSource(address: string) {
     return new Promise<void>((resolve, reject) => {
 
         // Pokusaj uspostaviti konekciju sa inverterom
-        inverterEventSource = new EventSource(`${INVERTER_ADDRESS}${STREAM_ENDPOINT}`, {});
+        inverterEventSource = new EventSource(`${address}${STREAM_ENDPOINT}`, {});
 
         // Resolvaj promise kada se konekcija uspostavi
         inverterEventSource.onopen = () => {
+            inverterAddress = address;
             resolve();
         }
 
@@ -34,6 +36,8 @@ export function setupEventSource() {
 
             // Azuriraj globalni status konekcije na inverter
             inverterConnected.value = false;
+
+            inverterAddress = null;
 
             // Ako je jos u toku pokusaj uspostavljanja konekcije, rejectaj promise
             reject();
@@ -69,7 +73,10 @@ function parseInverterStreamPacket(packet: string): InverterPacket {
 }
 
 async function sendCommand(endpoint: string, value: number) {
-    await fetch(`${INVERTER_ADDRESS}${endpoint}?${value}`, {
+    if (!inverterAddress) {
+        throw new Error("Inverter nije spojen");
+    }
+    await fetch(`${inverterAddress}${endpoint}?${value}`, {
         mode: "no-cors"
     });
 }
