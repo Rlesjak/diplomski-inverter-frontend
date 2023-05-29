@@ -4,7 +4,7 @@
 
 <script setup lang="ts">
 import { initialiseScopeInstance } from '../modules/scope';
-import { onMounted } from 'vue';
+import { onMounted, onUnmounted } from 'vue';
 
 onMounted(() => {
     const chartEl = document.getElementById('baseChart1') as HTMLDivElement;
@@ -12,4 +12,8 @@ onMounted(() => {
         initialiseScopeInstance(chartEl);
     }
 })
+
+onUnmounted(() => {
+    console.log("Unmounting");
+});
 </script>

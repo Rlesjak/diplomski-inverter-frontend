@@ -2,7 +2,10 @@
 
     <Transition>
         <div v-if="!inverterConnected">
-            <p class="mb-2">Adresa invertera: </p>
+            <div @click="reload()" class="w-full btn btn-info">
+                Očisti
+            </div>
+            <p class="mt-4 mb-2">Adresa invertera: </p>
             <input
                 v-model="inverterAddress"
                 class="w-full px-2 py-1 text-black border border-gray-400 rounded"
@@ -14,10 +17,9 @@
     <button
         @click="toggleConnection"
         class="mt-4 btn btn-primary"
-        :disabled="isLoading"
-        :class="{'btn-outline': inverterConnected}"
+        :class="{'btn-outline': inverterConnected, 'animate-pulse': isLoading}"
     >
-        {{ isLoading ? 'Spajanje...' : inverterConnected ? 'Odspoji se' : 'Spoji se' }}
+        {{ isLoading ? 'Spajanje... (otkaži)' : inverterConnected ? 'Odspoji se' : 'Spoji se' }}
     </button>
 </template>
 
@@ -30,9 +32,10 @@ const isLoading = ref(false);
 const inverterAddress = ref(DEFAULT_INVERTER_ADDRESS);
 
 async function toggleConnection() {
-    if (inverterConnected.value) {
+    if (inverterConnected.value || isLoading.value) {
         closeEventSource();
         inverterConnected.value = false;
+        isLoading.value = false;
     }
     else {
         await openConnection();
@@ -51,5 +54,9 @@ async function openConnection() {
     }
 
     isLoading.value = false;
+}
+
+function reload() {
+    location.reload();
 }
 </script>

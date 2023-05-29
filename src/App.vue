@@ -1,7 +1,7 @@
 <template>
   <div class="flex w-full h-full">
     <div class="w-full p-2 overflow-auto">
-      <BaseGraph />
+      <BaseGraph/>
       <div class="w-full px-32 py-16">
         <FocBlockDiagramVue />
       </div>
