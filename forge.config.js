@@ -1,6 +1,6 @@
 module.exports = {
   packagerConfig: {
-    icon: "./dist/icons/win/icon",
+    icon: "./icon/target/icon",
     ignore: [
       ".vscode",
       ".gitignore",
@@ -26,34 +26,22 @@ module.exports = {
     {
       name: '@electron-forge/maker-squirrel',
       config: {
-        options: {
-          icon: "./dist/icons/win/icon.ico"
-        }
       },
     },
     {
       name: '@electron-forge/maker-zip',
       platforms: ['darwin'],
       config: {
-        options: {
-          icon: "./dist/icons/mac/icon.icns"
-        }
       },
     },
     {
       name: '@electron-forge/maker-deb',
       config: {
-        options: {
-          icon: "./dist/icons/png/128x128.png"
-        }
       },
     },
     {
       name: '@electron-forge/maker-rpm',
       config: {
-        options: {
-          icon: "./dist/icons/png/128x128.png"
-        }
       },
     },
   ],

@@ -14,8 +14,7 @@
     "electron:start": "electron .",
     "start": "electron-forge start",
     "package": "electron-forge package",
-    "make:icons": "electron-icon-maker electron-icon-maker --input=./icon/ElectronIkona.png --output=./dist",
-    "make": "npm run build & npm run make:icons & electron-forge make"
+    "make": "npm run build && electron-forge make"
   },
   "dependencies": {
     "@arction/lcjs": "^4.0.2",
