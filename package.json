@@ -2,6 +2,8 @@
   "name": "diplomski-inverter-frontend",
   "version": "0.0.0",
   "private": true,
+  "author": "Robert Lesjak",
+  "description": "Upravljačka konzola - AM263x inverter",
   "main": "electron.js",
   "scripts": {
     "dev": "vite",
