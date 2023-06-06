@@ -4,13 +4,19 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 
 // https://vitejs.dev/config/
-export default defineConfig({
-  base: path.resolve(__dirname, "./dist/"),
-  server: { port: 8080 },
-  plugins: [vue()],
-  resolve: {
-    alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
+export default ({ mode }) => {
+
+  console.log(mode)
+
+
+  return defineConfig({
+    base: mode == 'development' ? "/" : path.resolve(__dirname, "./dist/"),
+    server: { port: 8080 },
+    plugins: [vue()],
+    resolve: {
+      alias: {
+        '@': fileURLToPath(new URL('./src', import.meta.url))
+      }
     }
-  }
-})
+  })
+}
