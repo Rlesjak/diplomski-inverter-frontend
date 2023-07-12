@@ -9,7 +9,7 @@
         </div>
 
         <div
-          class="bg-gray-100 px-6 py-4 rounded-md transition-all"
+          class="bg-gray-100 px-6 py-4 rounded-md transition-all z-10"
           :class="{
             'fixed block top-10 bottom-10 left-10 right-10 drop-shadow-lg': diagramIsModal
           }"
@@ -23,7 +23,7 @@
               <Icon v-else :icon="arrowTopRightOnSquare20Solid" class="w-6 h-6" />
             </div>
             <h1 class="text-center text-xl">Blokovski dijagram regulacijske strukture</h1>
-            <FocBlockDiagramVue class="h-[calc(100%-3rem)] w-full mt-6" />
+            <FocBlockDiagramVue class="h-[calc(100%-3rem)] w-full mt-6 z-10" />
           </div>
         </div>
 

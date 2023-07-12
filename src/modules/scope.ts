@@ -41,10 +41,10 @@ export function initialiseScopeInstance(containerElement: HTMLDivElement): void 
     // Brzina vrtnje motora
     const speedChart = addScopeChart(0, "Brzina vrtnje", "[rad/s]", dashboard);
     xAxes.push(speedChart.getDefaultAxisX());
-    const measuredSpeedSeries = addScopeSeries(speedChart, "Mjerena brzina", "#ff0000");
+    // const measuredSpeedSeries = addScopeSeries(speedChart, "Mjerena brzina", "#ff0000");
     const referenceSpeedSeries = addScopeSeries(speedChart, "Referentna brzina", "#0000ff");
     const wantedSpeedSeries = addScopeSeries(speedChart, "Željena brzina", "#00ff00");
-    const electricalSpeedSeries = addScopeSeries(speedChart, "Električna brzina", "#ff00ff");
+    const electricalSpeedSeries = addScopeSeries(speedChart, "Električna brzina rotora", "#ff00ff");
     addLegend(speedChart);
 
     // DQ struje motora
@@ -84,7 +84,7 @@ export function initialiseScopeInstance(containerElement: HTMLDivElement): void 
     // Subscribe serieseseses to inverter stream
     subscribeToInverterStream("scope", (data) => {
         // Brzina vrtnje motora
-        measuredSpeedSeries.add({ x: data[0], y: data[18] });
+        // measuredSpeedSeries.add({ x: data[0], y: data[18] });
         referenceSpeedSeries.add({ x: data[0], y: data[21] });
         wantedSpeedSeries.add({ x: data[0], y: data[19]*twoPiF });
         electricalSpeedSeries.add({ x: data[0], y: data[8] });

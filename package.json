@@ -14,7 +14,7 @@
     "electron:start": "electron .",
     "start": "electron-forge start",
     "package": "electron-forge package",
-    "make": "npm run build && electron-forge make"
+    "make": "npm run build-only && electron-forge make"
   },
   "dependencies": {
     "@arction/lcjs": "^4.0.2",
