@@ -116,7 +116,7 @@
             </div>
         </template>
     </div>
-    <a class="mt-4 text-center text-gray-500" href="http://lesjak.tech" target="_blank" rel="noopener noreferrer">Robert Lesjak - lesjak.tech</a>
+    <a class="mt-4 text-center text-gray-500" href="https://etvornica.hr" target="_blank" rel="noopener noreferrer">Robert Lesjak</a>
 </template>
 
 <script setup lang="ts">
